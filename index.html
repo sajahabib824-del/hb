@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Hand Particle Saturn — Mobile + Desktop (Final)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    html,body{height:100%;margin:0;background:#000;overflow:hidden;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;}
+    #three-container{width:100vw;height:100vh;position:relative;display:block;}
+    video#video{position:absolute;right:12px;bottom:12px;width:160px;height:120px;object-fit:cover;border-radius:8px;transform:scaleX(-1);opacity:0.75;z-index:6;border:1px solid rgba(255,255,255,0.06);background:#000;display:none}
+    #controls{position:absolute;left:12px;top:12px;z-index:6;color:#ddd;font-size:13px;background:rgba(0,0,0,0.25);padding:8px;border-radius:6px;display:flex;gap:8px;align-items:center}
+    button.ctrl{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#ddd;padding:6px 8px;border-radius:6px;cursor:pointer}
+    #hint{position:absolute;left:12px;top:64px;color:#ddd;font-size:12px;background:rgba(0,0,0,0.25);padding:6px 8px;border-radius:6px;z-index:6;max-width:260px}
+    #overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:8;pointer-events:auto}
+    #start{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:14px 18px;border-radius:12px;font-size:16px;cursor:pointer}
+    #watermark{position:fixed;right:10px;bottom:6px;color:rgba(255,255,255,0.18);font-size:12px;z-index:9;pointer-events:none}
+    /* small modal */
+    #editModal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.9);border:1px solid rgba(255,255,255,0.08);padding:14px;border-radius:10px;z-index:20;display:none;min-width:260px}
+    #editModal input{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:#0b0b0b;color:#fff;margin-bottom:8px}
+    #editModal .row{display:flex;gap:8px;justify-content:flex-end}
+    .small{font-size:12px;opacity:0.9}
+    a.link{color:#9fd2ff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div id="three-container"></div>
+
+  <video id="video" autoplay playsinline muted></video>
+
+  <div id="controls" aria-hidden="false">
+    <button id="btn-sat" class="ctrl">Force Saturn</button>
+    <button id="btn-disp" class="ctrl">Force Disperse</button>
+    <button id="btn-text" class="ctrl">Force Text</button>
+    <button id="btn-edit" class="ctrl">Edit Text</button>
+  </div>
+
+  <div id="hint">Fist ▶ Saturn • Open palm ▶ Disperse • Two fingers ▶ Text</div>
+
+  <div id="overlay">
+    <button id="start">Tap to start camera</button>
+  </div>
+
+  <div id="editModal" role="dialog" aria-modal="true">
+    <div style="margin-bottom:8px;color:#ddd">Edit text that appears on two-finger gesture</div>
+    <input id="editInput" type="text" maxlength="60" placeholder="Type text here" />
+    <div class="row">
+      <button id="cancelEdit" class="ctrl">Cancel</button>
+      <button id="saveEdit" class="ctrl">Save</button>
+    </div>
+  </div>
+
+  <div id="watermark">by Abb</div>
+
+  <!-- libs -->
+  <script src="https://unpkg.com/three@0.154.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
